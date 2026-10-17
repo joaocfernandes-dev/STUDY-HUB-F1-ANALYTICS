@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio acadêmico de Engenharia de Dados e Machine Learning, com projetos de análise de dados aplicados ao automobilismo.">
+    <title>F1 Analytics | Portfólio</title>
+
+    <style>
+        :root {
+            --bg: #0b0d12;
+            --surface: #151922;
+            --surface-light: #1d2330;
+            --red: #e10600;
+            --text: #f5f5f5;
+            --muted: #b0b7c3;
+            --border: #303746;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            background: rgba(11, 13, 18, 0.96);
+        }
+
+        nav {
+            min-height: 75px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .hero {
+            padding: 100px 0 85px;
+            background:
+                radial-gradient(ellipse at 85% 20%, #3a1115 0%, transparent 40%),
+                linear-gradient(135deg, #0b0d12, #141923);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .eyebrow {
+            color: #ff625c;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            line-height: 1.05;
+            margin: 18px 0;
+        }
+
+        h1 span {
+            color: var(--red);
+        }
+
+        .hero p {
+            max-width: 680px;
+            color: var(--muted);
+            font-size: 1.08rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 5px;
+            background: var(--red);
+            color: white;
+            font-weight: bold;
+        }
+
+        .button.secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+        }
+
+        section {
+            padding: 70px 0;
+        }
+
+        .section-label {
+            color: #ff625c;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin: 8px 0 18px;
+        }
+
+        .intro {
+            max-width: 760px;
+            color: var(--muted);
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+            margin-top: 30px;
+        }
+
+        .card {
+            padding: 26px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--red);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .card h3 {
+            margin: 12px 0;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            font-size: 0.76rem;
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 5px 10px;
+            color: #e4e7ed;
+        }
+
+        .card a {
+            margin-top: auto;
+            color: #ff625c;
+            font-weight: bold;
+        }
+
+        .skills {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .skill {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        .contact-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .contact-links a {
+            color: #ff625c;
+            font-weight: bold;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 25px 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 650px) {
+            nav {
+                padding: 18px 0;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .hero {
+                padding: 70px 0;
+            }
+
+            section {
+                padding: 50px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <a class="logo" href="#inicio">F1 <span>ANALYTICS</span></a>
+
+            <div class="nav-links">
+                <a href="#sobre">Sobre</a>
+                <a href="#projetos">Projetos</a>
+                <a href="#competencias">Competências</a>
+                <a href="#contato">Contato</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <div class="container">
+                <div class="eyebrow">Portfólio acadêmico</div>
+
+                <h1>Dados em foco.<br>
+                    <span>Performance em análise.</span>
+                </h1>
+
+                <p>
+                    Olá! Sou estudante de Engenharia de Dados e Machine Learning.
+                    Este portfólio reúne minha trajetória acadêmica e meus projetos
+                    de tecnologia, com foco em análise de dados aplicada ao automobilismo.
+                </p>
+
+                <div class="actions">
+                    <a class="button" href="#projetos">Explorar projetos</a>
+                    <a class="button secondary"
+                       href="https://github.com/joaocfernandes-dev/STUDY-HUB-F1-ANALYTICS"
+                       target="_blank" rel="noopener noreferrer">
+                        Meu GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre">
+            <div class="container">
+                <div class="section-label">01 / Sobre</div>
+                <h2>Tecnologia aplicada a problemas reais</h2>
+
+                <p class="intro">
+                    Meu objetivo é desenvolver conhecimentos em programação,
+                    engenharia de dados, análise e Machine Learning. Utilizo a
+                    Fórmula 1 como contexto para explorar como dados podem ajudar
+                    a compreender resultados, identificar padrões e transformar
+                    informações em conhecimento.
+                </p>
+            </div>
+        </section>
+
+        <section id="projetos">
+            <div class="container">
+                <div class="section-label">02 / Projetos</div>
+                <h2>Projetos em destaque</h2>
+
+                <p class="intro">
+                    Projetos acadêmicos e pessoais que representam minha evolução
+                    na área de dados e desenvolvimento de software.
+                </p>
+
+                <div class="projects">
+                    <article class="card">
+                        <span class="tag">Portfólio acadêmico</span>
+                        <h3>Study Hub — F1 Analytics</h3>
+                        <p>
+                            Estrutura de organização da trajetória acadêmica,
+                            documentação de aprendizados e planejamento de projetos
+                            voltados à tecnologia e ao automobilismo.
+                        </p>
+                        <a href="https://github.com/joaocfernandes-dev/STUDY-HUB-F1-ANALYTICS"
+                           target="_blank" rel="noopener noreferrer">
+                            Ver repositório ↗
+                        </a>
+                    </article>
+
+                    <article class="card">
+                        <span class="tag">Projeto em planejamento</span>
+                        <h3>F1 Data Tracker</h3>
+                        <p>
+                            Proposta de sistema para cadastrar corridas, pilotos,
+                            equipes e resultados, com consultas de pontuação e
+                            classificação de uma temporada.
+                        </p>
+                        <a href="#contato">Em desenvolvimento</a>
+                    </article>
+
+                    <article class="card">
+                        <span class="tag">Área de interesse</span>
+                        <h3>Data Analytics no automobilismo</h3>
+                        <p>
+                            Exploração de dados de corridas, desempenho de pilotos
+                            e equipes, com o objetivo de desenvolver análises e
+                            visualizações orientadas por dados.
+                        </p>
+                        <a href="#competencias">Conhecer interesses</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="competencias">
+            <div class="container">
+                <div class="section-label">03 / Competências</div>
+                <h2>Conhecimentos em desenvolvimento</h2>
+
+                <p class="intro">
+                    Estas são as áreas que fazem parte da minha formação e dos
+                    meus objetivos de aprendizagem.
+                </p>
+
+                <div class="skills">
+                    <span class="skill">Python</span>
+                    <span class="skill">Engenharia de Dados</span>
+                    <span class="skill">Machine Learning</span>
+                    <span class="skill">Análise de Dados</span>
+                    <span class="skill">Visualização de Dados</span>
+                    <span class="skill">Git e GitHub</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato">
+            <div class="container">
+                <div class="section-label">04 / Contato</div>
+                <h2>Vamos nos conectar</h2>
+
+                <div class="contact-box">
+                    <p class="intro">
+                        Este portfólio acompanha minha evolução acadêmica e
+                        profissional. Acesse meu repositório para acompanhar
+                        os projetos e suas atualizações.
+                    </p>
+
+                    <div class="contact-links">
+                        <a href="https://github.com/joaocfernandes-dev"
+                           target="_blank" rel="noopener noreferrer">
+                            GitHub ↗
+                        </a>
+                        <a href="https://www.linkedin.com/"
+                           target="_blank" rel="noopener noreferrer">
+                            LinkedIn ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            Portfólio acadêmico • Engenharia de Dados e Machine Learning
+        </div>
+    </footer>
+</body>
+</html>
