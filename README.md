@@ -70,6 +70,14 @@ Projeto planejado para explorar o acompanhamento e a organização de informaç�
 | GitHub | Hospedagem e colaboração em projetos |
 | GitHub Pages | Publicação do portfólio |
 
+## 🔗 Integração pública com GitHub
+
+A página inicial consulta a API pública do GitHub para exibir até seis repositórios públicos do perfil `joaocfernandes-dev`. A consulta não utiliza token privado nem implementa autenticação; ela serve para facilitar a descoberta de repositórios públicos. Se a API estiver indisponível, o site oferece um link alternativo para o perfil.
+
+O site é estático. Gestão de utilizadores, login e permissões de acesso não são funcionalidades implementadas nesta versão e exigiriam uma solução adicional apropriada.
+
+Consulte o [plano de implementação e testes](docs/PLANO_IMPLEMENTACAO_E_TESTES.md) para ver os procedimentos de validação e as limitações conhecidas.
+
 ## 📈 Próximos passos
 
 - [x] Criar a estrutura inicial do repositório.

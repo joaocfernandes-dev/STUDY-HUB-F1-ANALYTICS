@@ -201,6 +201,28 @@
             font-weight: bold;
         }
 
+        .repo-status {
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .repo-meta {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-bottom: 18px;
+        }
+
+        .repo-card a {
+            margin-top: auto;
+            color: #ff625c;
+            font-weight: bold;
+        }
+
+        .repo-card .repo-language {
+            margin: 0 0 12px;
+        }
+
         .skills {
             display: flex;
             gap: 12px;
@@ -268,6 +290,7 @@
             <div class="nav-links">
                 <a href="#sobre">Sobre</a>
                 <a href="#projetos">Projetos</a>
+                <a href="#repositorios">GitHub</a>
                 <a href="#competencias">Competências</a>
                 <a href="#contato">Contato</a>
             </div>
@@ -365,9 +388,19 @@
             </div>
         </section>
 
+        <section id="repositorios">
+            <div class="container">
+                <div class="section-label">03 / GitHub</div>
+                <h2>Repositórios públicos</h2>
+                <p class="intro">Esta seção consulta a API pública do GitHub para listar repositórios públicos do perfil. Nenhuma senha ou token de acesso é solicitado ou armazenado neste site.</p>
+                <p id="repo-status" class="repo-status" role="status" aria-live="polite">Carregando repositórios públicos do GitHub…</p>
+                <div id="github-repos" class="projects" aria-label="Lista de repositórios públicos"></div>
+            </div>
+        </section>
+
         <section id="competencias">
             <div class="container">
-                <div class="section-label">03 / Competências</div>
+                <div class="section-label">04 / Competências</div>
                 <h2>Conhecimentos em desenvolvimento</h2>
 
                 <p class="intro">
@@ -388,7 +421,7 @@
 
         <section id="contato">
             <div class="container">
-                <div class="section-label">04 / Contato</div>
+                <div class="section-label">05 / Contato</div>
                 <h2>Vamos nos conectar</h2>
 
                 <div class="contact-box">
@@ -403,10 +436,6 @@
                            target="_blank" rel="noopener noreferrer">
                             GitHub ↗
                         </a>
-                        <a href="https://www.linkedin.com/"
-                           target="_blank" rel="noopener noreferrer">
-                            LinkedIn ↗
-                        </a>
                     </div>
                 </div>
             </div>
@@ -418,5 +447,70 @@
             Portfólio acadêmico • Engenharia de Dados e Machine Learning
         </div>
     </footer>
+    <script>
+        (async function loadPublicGitHubRepositories() {
+            const container = document.getElementById("github-repos");
+            const status = document.getElementById("repo-status");
+            const username = "joaocfernandes-dev";
+
+            try {
+                const response = await fetch(
+                    `https://api.github.com/users/${username}/repos?sort=updated&per_page=6`,
+                    { headers: { Accept: "application/vnd.github+json" } }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`GitHub respondeu com status ${response.status}`);
+                }
+
+                const repositories = await response.json();
+                if (!Array.isArray(repositories) || repositories.length === 0) {
+                    status.textContent = "Nenhum repositório público foi encontrado para este perfil.";
+                    return;
+                }
+
+                repositories.forEach((repo) => {
+                    const article = document.createElement("article");
+                    article.className = "card repo-card";
+
+                    const tag = document.createElement("span");
+                    tag.className = "tag";
+                    tag.textContent = repo.fork ? "Repositório derivado" : "Repositório público";
+
+                    const title = document.createElement("h3");
+                    title.textContent = repo.name;
+
+                    const description = document.createElement("p");
+                    description.textContent = repo.description || "Sem descrição cadastrada no GitHub.";
+
+                    const meta = document.createElement("p");
+                    meta.className = "repo-meta repo-language";
+                    meta.textContent = `Linguagem: ${repo.language || "não informada"} · Atualizado em: ${new Date(repo.updated_at).toLocaleDateString("pt-BR")}`;
+
+                    const link = document.createElement("a");
+                    link.href = repo.html_url;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.textContent = "Abrir repositório ↗";
+
+                    article.append(tag, title, description, meta, link);
+                    container.appendChild(article);
+                });
+
+                status.textContent = `Foram carregados ${repositories.length} repositórios públicos diretamente do GitHub.`;
+            } catch (error) {
+                status.textContent = "Não foi possível carregar os repositórios agora. Você ainda pode acessar o perfil diretamente no GitHub.";
+                const link = document.createElement("a");
+                link.href = `https://github.com/${username}?tab=repositories`;
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+                link.textContent = "Ver repositórios no GitHub ↗";
+                link.style.color = "#ff625c";
+                status.appendChild(document.createTextNode(" "));
+                status.appendChild(link);
+                console.error("Falha ao consultar a API pública do GitHub:", error);
+            }
+        })();
+    </script>
 </body>
 </html>
